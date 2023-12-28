@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import EncryptText from "./components/custom/EncryptText";
 import DecryptText from "./components/custom/DecryptText";
 import DecryptImage from "./components/custom/DecryptImage";
+import EncryptImage from "./components/custom/EncryptImage";
 
 const App = () => {
   return (
@@ -22,8 +23,8 @@ const App = () => {
         <TabsContent value="td">
           <DecryptText />
         </TabsContent>
-        <TabsContent value="id">
-          <DecryptImage />
+        <TabsContent value="ie">
+          <EncryptImage />
         </TabsContent>
         <TabsContent value="id">
           <DecryptImage />
