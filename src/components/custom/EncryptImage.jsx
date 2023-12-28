@@ -29,7 +29,7 @@ export default function EncryptImage() {
       return;
     }
 
-    if (file.size > 50000) {
+    if (file.size > 300000) {
       setFileError("Image size must not exceed 300kB");
       return;
     }
@@ -69,10 +69,14 @@ export default function EncryptImage() {
     const reader = new FileReader();
 
     reader.onload = () => {
-      const base64 = reader.result.substring(reader.result.indexOf(",") + 1);
-      const encrypted = CryptoJS.AES.encrypt(base64, key);
-      console.log(encrypted.toString());
+      // const base64 = reader.result.substring(reader.result.indexOf(",") + 1);
+      const encrypted = CryptoJS.AES.encrypt(reader.result, key);
+      const decrypted = CryptoJS.AES.decrypt(encrypted, key);
+      // // console.log(encrypted.toString());
+      // console.log("this is the encrypted string:");
       setEncryptedImage(encrypted.toString());
+      console.log("this is the decrypted");
+      console.log(decrypted.toString(CryptoJS.enc.Utf8));
     };
 
     reader.readAsDataURL(file);
@@ -142,7 +146,7 @@ export default function EncryptImage() {
             id="encrypted"
             // cols="30"
             rows="6"
-            className="w-full border-black border-2 rounded-lg text-lg p-2 focus:outline-none"
+            className="w-full overflow-x-hidden border-black border-2 rounded-lg text-lg p-2 focus:outline-none"
             readOnly
             value={encryptedImage}
           />
