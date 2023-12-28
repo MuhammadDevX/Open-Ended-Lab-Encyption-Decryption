@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import Image from "./Image";
 import { Button } from "./components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
+import EncryptText from "./components/custom/EncryptText";
+import DecryptText from "./components/custom/DecryptText";
 
 const App = () => {
   return (
-    <div className="h-screen flex flex-col gap-2 justify-center items-center">
+    <div className="min-h-screen flex flex-col gap-2 justify-start my-6 items-center">
       <Tabs defaultValue="te">
         <TabsList>
           <TabsTrigger value="te">Encrypt Text</TabsTrigger>
@@ -13,8 +15,12 @@ const App = () => {
           <TabsTrigger value="ie">Encrypt Image</TabsTrigger>
           <TabsTrigger value="id">Decrypt Image</TabsTrigger>
         </TabsList>
-        <TabsContent value="te">Make changes to your account here.</TabsContent>
-        <TabsContent value="td">Change your password here.</TabsContent>
+        <TabsContent value="te">
+          <EncryptText />
+          </TabsContent>
+        <TabsContent value="td">
+          <DecryptText/>
+          </TabsContent>
       </Tabs>
     </div>
   );
