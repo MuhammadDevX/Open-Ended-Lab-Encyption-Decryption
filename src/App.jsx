@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Image from "./Image";
 import { Button } from "./components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
-import EncryptImage from "./components/custom/EncryptImage";
+import EncryptText from "./components/custom/EncryptText";
+import DecryptText from "./components/custom/DecryptText";
 import DecryptImage from "./components/custom/DecryptImage";
 
 const App = () => {
@@ -15,10 +16,14 @@ const App = () => {
           <TabsTrigger value="ie">Encrypt Image</TabsTrigger>
           <TabsTrigger value="id">Decrypt Image</TabsTrigger>
         </TabsList>
-        <TabsContent value="te">Make changes to your account here.</TabsContent>
-        <TabsContent value="td">Change your password here.</TabsContent>
-        <TabsContent value="ie">
-          <EncryptImage />
+        <TabsContent value="te">
+          <EncryptText />
+        </TabsContent>
+        <TabsContent value="td">
+          <DecryptText />
+        </TabsContent>
+        <TabsContent value="id">
+          <DecryptImage />
         </TabsContent>
         <TabsContent value="id">
           <DecryptImage />
