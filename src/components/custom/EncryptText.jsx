@@ -35,12 +35,7 @@ export default function EncryptText() {
       setTextError("Text for encryption must be provided");
       return;
     }
-    // start encryption
-    // a.
-    // Convert the key to a WordArray
-    // const keyBytes = CryptoJS.enc.Utf8.parse(key);
-
-    // Encrypt the text
+    // Decrypt the text
     const encrypted = CryptoJS[algorithm].encrypt(text, key);
     setEncryptedText(encrypted.toString());
     // Encode the result based on user choice
@@ -68,7 +63,10 @@ export default function EncryptText() {
         placeholder="Enter Text To Encrypt"
         className="w-full text-md border-2 border-solid rounded-lg p-2 border-black outline-none"
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          setText(e.target.value);
+          setTextError();
+        }}
       />
       <div className="flex flex-row justify-start gap-2 items-center">
         <p className="text-start">Select Algorithm</p>
@@ -108,26 +106,6 @@ export default function EncryptText() {
         <span className="text-sm font-bold text-red-500">{keyError}</span>
       )}
 
-      {/* <div className="flex gap-8 items-center">
-        <p>Output Format:</p>
-        <RadioGroup
-          value={outputFormat}
-          onValueChange={(value) => setOutputFormat(value)}
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="Base64" id="Base64" />
-            <Label htmlFor="Base64" className="text-md">
-              Base64
-            </Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="Hex" id="Hex" />
-            <Label htmlFor="Hex" className="text-md">
-              Hex
-            </Label>
-          </div>
-        </RadioGroup>
-      </div> */}
       <Button className="self-start" onClick={handleEncrypt}>
         Encrypt
       </Button>
