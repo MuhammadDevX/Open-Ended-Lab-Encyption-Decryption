@@ -14,19 +14,14 @@ import { Button } from "@/components/ui/button";
 function DecryptText() {
   return (
     <Card className="border border-solid flex flex-col justify-center gap-3 p-4">
-      <div className="text-center">
-        <label for="enterTextForEncryption" className="w-200 font-bold text-xl">
-          Decrypt Text
-        </label>
-      </div>
-      <div>
-        <textarea
-          id="enterTextForEncryption"
-          rows={3}
-          placeholder="Enter Text To Decrypt"
-          className="w-full border border-solid rounded-lg  p-2 border-black outline-none"
-        />
-      </div>
+      <label className="font-bold text-xl">
+        Enter Encrypted Text to Decrypt
+      </label>
+      <textarea
+        rows={3}
+        placeholder="Enter Text To Encrypt"
+        className="w-full text-md border-2 border-solid rounded-lg  p-2 border-black outline-none"
+      />
       <div className="flex flex-row justify-start gap-2 items-center">
         <div>
           <p>Select Algorithm</p>
@@ -45,22 +40,19 @@ function DecryptText() {
           </Select>
         </div>
       </div>
-      <div className="flex gap-3 justify-start items-center">
+      <div className="flex gap-3 items-center">
+        <label for="Key">Write Key</label>
+
+        <input
+          id="key"
+          type="text"
+          className="px-2 flex-1 border-2 border-black rounded-lg h-[45px] text-lg"
+          // onChange={handleKeyChange}
+          // value={key}
+          placeholder="Enter key here"
+        />
         <div>
-          <label for="Key">Write Key</label>
-        </div>
-        <div>
-          <input
-            type="text"
-            id="Key"
-            className="p-1 border border-1 border-solid border-black rounded-lg outline-none "
-            placeholder="Enter key here"
-          />
-        </div>
-        <div>
-          <Button className="rounded-lg px-2 py-1 bg-slate-950 text-white">
-            Generate
-          </Button>
+          <Button>Generate</Button>
         </div>
       </div>
       <div>
@@ -71,9 +63,9 @@ function DecryptText() {
           style={{ resize: "none" }}
           name=""
           id="encrypted"
-          cols="30"
+          // cols="30"
           rows="6"
-          className="w-full border border-1 border-black  border-solid rounded-lg text-lg p-2 focus:outline-none"
+          className="w-full border-2 border-black overflow-x-hidden border-solid rounded-lg text-lg p-2 focus:outline-none"
         ></textarea>
         {/* button */}
         <CopyIcon

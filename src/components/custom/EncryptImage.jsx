@@ -111,7 +111,7 @@ export default function EncryptImage() {
 
       {/* Encryption Key Input */}
       <div className="flex gap-2 items-center">
-        <label className="font-bold text-xl" htmlFor="key">
+        <label className=" text-lg" htmlFor="key">
           Encryption key
         </label>
         <input
@@ -136,7 +136,7 @@ export default function EncryptImage() {
 
       {/* Encrypted Image Textarea */}
       <div className="flex flex-col gap-1">
-        <span className="font-bold text-xl" htmlFor="encrypted">
+        <span className="text-lg" htmlFor="encrypted">
           Encrypted Image (in base64)
         </span>
         <div className="w-full relative">
