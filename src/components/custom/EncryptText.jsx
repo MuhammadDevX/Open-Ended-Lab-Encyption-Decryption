@@ -1,17 +1,8 @@
 import { useState } from "react";
 import { CopyIcon } from "lucide-react";
 import { Card } from "../ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import CryptoJS, { enc } from "crypto-js";
+import CryptoJS from "crypto-js";
 import { downloadFile } from "@/lib/utils";
 import Algorithm from "../ui/algorithm";
 
@@ -101,11 +92,11 @@ export default function EncryptText() {
           id="encrypted"
           rows="4"
           readOnly
-          className="w-full border-2 border-black overflow-x-hidden rounded-lg text-lg p-2 focus:outline-none"
+          className="w-full border-2 border-black overflow-x-hidden rounded-lg text-lg p-2 pr-4 focus:outline-none"
           value={encryptedText}
         />
         <CopyIcon
-          className="h-4 w-4 absolute top-2 right-2 cursor-pointer"
+          className="h-4 w-4 absolute top-2 right-4 cursor-pointer"
           onClick={() => {
             navigator.clipboard.writeText(encryptedText).catch((err) => {
               console.log(err.message);

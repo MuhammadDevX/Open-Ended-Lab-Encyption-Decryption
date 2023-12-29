@@ -1,14 +1,7 @@
 // const { Card } = require("../ui/card");
 import { Card } from "../ui/card";
 import { CopyIcon } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import CryptoJS, { algo } from "crypto-js";
+import CryptoJS from "crypto-js";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { downloadFile } from "@/lib/utils";

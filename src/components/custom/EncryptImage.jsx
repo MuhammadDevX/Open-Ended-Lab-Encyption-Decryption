@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import { CopyIcon } from "lucide-react";
-import { Card, CardContent } from "../ui/card";
+import { CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 import CryptoJS from "crypto-js";
 import { downloadFile } from "@/lib/utils";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import Algorithm from "../ui/algorithm";
 
 export default function EncryptImage() {

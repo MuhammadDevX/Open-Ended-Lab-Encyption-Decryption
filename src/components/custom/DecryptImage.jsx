@@ -1,16 +1,9 @@
 import React, { useState } from "react";
-import { CopyIcon } from "lucide-react";
-import { Card, CardContent } from "../ui/card";
+import { CardContent } from "../ui/card";
 import { Button } from "../ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import CryptoJS from "crypto-js";
 import Algorithm from "../ui/algorithm";
+import { downloadImage } from "@/lib/utils";
 
 export default function DecryptImage() {
   const [key, setKey] = useState("");
@@ -124,6 +117,9 @@ export default function DecryptImage() {
               className="max-w-full h-auto"
             />
           </div>
+          <Button onClick={() => downloadImage("decrypted.png", image)}>
+            Download
+          </Button>
         </>
       )}
       {imageError && (
