@@ -48,7 +48,7 @@ function DecryptText() {
   }
 
   return (
-    <Card className="border border-solid flex flex-col justify-center gap-3 p-4">
+    <Card className="border-2 border-solid flex flex-col justify-center gap-3 p-4">
       <label className="font-bold text-xl">
         Enter Encrypted Text to Decrypt
       </label>

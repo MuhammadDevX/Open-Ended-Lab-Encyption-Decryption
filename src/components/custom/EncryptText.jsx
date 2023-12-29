@@ -46,7 +46,7 @@ export default function EncryptText() {
   };
 
   return (
-    <Card className="border border-solid flex flex-col justify-center gap-3 p-4">
+    <Card className="border-2 border-solid flex flex-col justify-center gap-3 p-4">
       <label
         htmlFor="textForDecryption"
         className="w-full text-left font-bold text-xl"
