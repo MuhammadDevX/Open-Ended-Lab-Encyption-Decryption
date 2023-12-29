@@ -117,7 +117,10 @@ export default function DecryptImage() {
               className="max-w-full h-auto"
             />
           </div>
-          <Button onClick={() => downloadImage("decrypted.png", image)}>
+          <Button
+            className="self-end"
+            onClick={() => downloadImage("decrypted.png", image)}
+          >
             Download
           </Button>
         </>
