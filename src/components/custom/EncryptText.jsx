@@ -12,6 +12,8 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import CryptoJS, { enc } from "crypto-js";
+import { downloadFile } from "@/lib/utils";
+import Algorithm from "../ui/algorithm";
 
 export default function EncryptText() {
   const [text, setText] = useState("");
@@ -23,9 +25,6 @@ export default function EncryptText() {
   const [encryptedText, setEncryptedText] = useState("");
 
   const handleEncrypt = () => {
-    // Add encryption logic here and update encryptedText state
-    // Example: setEncryptedText(encryptedResult);
-
     // For now, let's handle the case of no encryption algorithm selected
     if (!key) {
       setKeyError("Encryption key must be provided");
@@ -38,16 +37,12 @@ export default function EncryptText() {
     // Decrypt the text
     const encrypted = CryptoJS[algorithm].encrypt(text, key);
     setEncryptedText(encrypted.toString());
-    // Encode the result based on user choice
-
-    // console.log(encrypted.toString());
-
-    // // Update the state with the encrypted text
-    // // setEncryptedText(encryptedText.toString());
-
-    // // For Hex encoding
-    // const encryptedHex = encryptedText.toString();
-    // console.log(encryptedText.toString());
+  };
+  const handleGenerateKey = () => {
+    // Generate a random key (you can replace this with your key generation logic)
+    const generatedKey = Math.random().toString(36).substring(2, 10);
+    setKey(generatedKey);
+    setKeyError(null);
   };
 
   return (
@@ -68,23 +63,7 @@ export default function EncryptText() {
           setTextError();
         }}
       />
-      <div className="flex flex-row justify-start gap-2 items-center">
-        <p className="text-start">Select Algorithm</p>
-        <Select
-          value={algorithm}
-          onValueChange={(value) => setAlgorithm(value)}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Enter an algorithm" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="AES">AES</SelectItem>
-            <SelectItem value="DES">DES</SelectItem>
-            <SelectItem value="Rabbit">Rabbit</SelectItem>
-            <SelectItem value="RC4">RC4</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      <Algorithm algorithm={algorithm} setAlgorithm={setAlgorithm} />
       <div className="flex gap-3 items-center">
         <label htmlFor="key">Write Key</label>
         <input
@@ -99,7 +78,7 @@ export default function EncryptText() {
           placeholder="Enter key here"
         />
         <div>
-          <Button>Generate</Button>
+          <Button onClick={handleGenerateKey}>Generate</Button>
         </div>
       </div>
       {keyError && (
@@ -134,7 +113,12 @@ export default function EncryptText() {
           }}
         />
         <div className="flex justify-end">
-          <Button className="self-end">Download</Button>
+          <Button
+            onClick={() => downloadFile("encrypted.txt", encryptedText)}
+            className="self-end"
+          >
+            Download
+          </Button>
         </div>
       </div>
     </Card>

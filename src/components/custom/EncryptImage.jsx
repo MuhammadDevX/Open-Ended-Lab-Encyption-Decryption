@@ -3,12 +3,22 @@ import { CopyIcon } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 import CryptoJS from "crypto-js";
+import { downloadFile } from "@/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import Algorithm from "../ui/algorithm";
 
 export default function EncryptImage() {
   const [file, setFile] = useState();
   const [fileError, setFileError] = useState(null);
   const [key, setKey] = useState("");
   const [keyError, setKeyError] = useState(null);
+  const [algorithm, setAlgorithm] = useState("AES");
   const [encryptedImage, setEncryptedImage] = useState("");
 
   function fileChange(e) {
@@ -70,13 +80,13 @@ export default function EncryptImage() {
 
     reader.onload = () => {
       // const base64 = reader.result.substring(reader.result.indexOf(",") + 1);
-      const encrypted = CryptoJS.AES.encrypt(reader.result, key);
-      const decrypted = CryptoJS.AES.decrypt(encrypted, key);
+      const encrypted = CryptoJS[algorithm].encrypt(reader.result, key);
+      // const decrypted = CryptoJS.AES.decrypt(encrypted, key);
       // // console.log(encrypted.toString());
       // console.log("this is the encrypted string:");
       setEncryptedImage(encrypted.toString());
-      console.log("this is the decrypted");
-      console.log(decrypted.toString(CryptoJS.enc.Utf8));
+      // console.log("this is the decrypted");
+      // console.log(decrypted.toString(CryptoJS.enc.Utf8));
     };
 
     reader.readAsDataURL(file);
@@ -123,7 +133,7 @@ export default function EncryptImage() {
         />
         <Button onClick={handleGenerateKey}>Generate</Button>
       </div>
-
+      <Algorithm algorithm={algorithm} setAlgorithm={setAlgorithm} />
       {/* Error Messages below the key */}
       {keyError && (
         <span className="text-sm font-bold text-red-500">{keyError}</span>
@@ -163,7 +173,12 @@ export default function EncryptImage() {
       </div>
 
       {/* Download Button */}
-      <Button className="self-end">Download</Button>
+      <Button
+        className="self-end"
+        onClick={(e) => downloadFile("encrypted", encryptedImage)}
+      >
+        Download
+      </Button>
     </CardContent>
   );
 }

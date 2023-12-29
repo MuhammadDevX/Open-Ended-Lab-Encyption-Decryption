@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import { CopyIcon } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 import CryptoJS from "crypto-js";
+import Algorithm from "../ui/algorithm";
 
 export default function DecryptImage() {
   const [key, setKey] = useState("");
@@ -10,6 +18,7 @@ export default function DecryptImage() {
   const [encryptedText, setEncryptedText] = useState("");
   const [image, setImage] = useState();
   const [imageError, setImageError] = useState();
+  const [algorithm, setAlgorithm] = useState("AES");
 
   async function checkImage(str) {
     return new Promise((resolve, _) => {
@@ -42,7 +51,7 @@ export default function DecryptImage() {
       return;
     }
     try {
-      const decrypted = CryptoJS.AES.decrypt(encryptedText, key);
+      const decrypted = CryptoJS[algorithm].decrypt(encryptedText, key);
       const decryptedBase64 = decrypted.toString(CryptoJS.enc.Utf8);
 
       const isValid = await checkImage(decryptedBase64);
@@ -84,7 +93,7 @@ export default function DecryptImage() {
       />
       {/* KEY OF ENCRYPTION */}
       <div className="flex gap-2 items-center">
-        <label className="font-bold text-xl" htmlFor="key">
+        <label className="text-md" htmlFor="key">
           Encryption key
         </label>
         <input
@@ -95,6 +104,7 @@ export default function DecryptImage() {
           value={key}
         />
       </div>
+      <Algorithm algorithm={algorithm} setAlgorithm={setAlgorithm} />
       {/* ENCRYPT ERROR */}
       {keyError && (
         <span className="text-sm font-bold text-red-500">{keyError}</span>

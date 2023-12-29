@@ -8,9 +8,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import CryptoJS from "crypto-js";
+import CryptoJS, { algo } from "crypto-js";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { downloadFile } from "@/lib/utils";
+import Algorithm from "../ui/algorithm";
 
 function DecryptText() {
   const [text, setText] = useState("");
@@ -37,6 +39,7 @@ function DecryptText() {
         .toString(CryptoJS.enc.Utf8);
       if (!decryptedText) throw new Error("Invalid text");
       setDecryptedText(decryptedText);
+      setTextError();
       // console.log(decryptedText);
     } catch (err) {
       console.error(err.message);
@@ -59,25 +62,7 @@ function DecryptText() {
           setTextError();
         }}
       />
-      <div className="flex flex-row justify-start gap-2 items-center">
-        <div>
-          <p>Select Algorithm</p>
-        </div>
-        <Select
-          value={algorithm}
-          onValueChange={(value) => setAlgorithm(value)}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Enter an algorithm" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="AES">AES</SelectItem>
-            <SelectItem value="DES">DES</SelectItem>
-            <SelectItem value="Rabbit">Rabbit</SelectItem>
-            <SelectItem value="RC4">RC4</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      <Algorithm algorithm={algorithm} setAlgorithm={setAlgorithm} />
       <div className="flex gap-2 items-center">
         <label className="text-lg" htmlFor="key">
           Encryption key
@@ -97,7 +82,7 @@ function DecryptText() {
         <span className="text-sm font-bold text-red-500">{keyError}</span>
       )}
       <Button className="self-start" onClick={handleDecrypt}>
-        Encrypt
+        Decrypt
       </Button>
       {textError && (
         <span className="text-sm font-bold text-red-500">{textError}</span>
@@ -120,13 +105,16 @@ function DecryptText() {
             <CopyIcon
               className="h-4 w-4 absolute top-2 right-2 cursor-pointer"
               onClick={() => {
-                navigator.clipboard.writeText("you wassup").catch((err) => {
+                navigator.clipboard.writeText(decryptedText).catch((err) => {
                   console.log(err.message);
                 });
               }}
             />
             <div className="flex justify-end">
-              <Button className="self-end rounded-lg px-2 py-1 bg-slate-950 text-white ">
+              <Button
+                onClick={() => downloadFile("decrypted.txt", decryptedText)}
+                className="self-end rounded-lg px-2 py-1 bg-slate-950 text-white "
+              >
                 Download
               </Button>
             </div>
