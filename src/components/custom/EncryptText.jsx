@@ -4,7 +4,7 @@ import { Card } from "../ui/card";
 import { Button } from "@/components/ui/button";
 import CryptoJS from "crypto-js";
 import { downloadFile } from "@/lib/utils";
-import Algorithm from "../ui/algorithm";
+import Algorithm from "@/components/ui/Algorithm";
 
 export default function EncryptText() {
   const [text, setText] = useState("");
